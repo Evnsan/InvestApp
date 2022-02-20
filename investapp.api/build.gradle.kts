@@ -6,15 +6,7 @@ plugins {
 	id("org.jetbrains.kotlin.plugin.allopen") version "1.6.10"
 	kotlin("jvm") version "1.6.10"
 	kotlin("plugin.spring") version "1.6.10"
-	kotlin("plugin.jpa") version "1.6.10"
 }
-
-allOpen {
-	annotation("javax.persistence.Entity")
-	annotation("javax.persistence.Embeddable")
-	annotation("javax.persistence.MappedSuperclass")
-}
-
 
 group = "nsan.com.br"
 version = "0.0.1-SNAPSHOT"
@@ -26,7 +18,6 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
