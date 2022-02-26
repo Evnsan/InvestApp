@@ -7,6 +7,7 @@ import java.util.UUID
 
 @Table
 data class Account(
+    // TODO: Turn code and agent_id into a composite key
     val code: String,
     val agent_id: AggregateReference<Agent, UUID>
 ) {
