@@ -1,8 +1,12 @@
 import React from "react";
 import TransferList from "../transfers/TransferList";
 import { connect } from "react-redux";
+import { loadTransfers } from "../../store/actions/transferActions";
 
 class Dashboard extends React.Component {
+    componentDidMount() {
+        this.props.loadTransfers();
+    }
     render() {
         //console.log(this.props);
         const { transfers } = this.props;
@@ -27,4 +31,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadTransfers: () => {
+            dispatch(loadTransfers())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

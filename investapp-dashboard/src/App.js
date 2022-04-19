@@ -15,7 +15,7 @@ class App extends React.Component {
           <Navbar />
           <Switch>
             <Route exact path='/' component={Dashboard} />
-            <Route path='/transfer/:id' component={TransferDetails} />
+            <Route path='/transfer/:transfer_id' component={TransferDetails} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
           </Switch>

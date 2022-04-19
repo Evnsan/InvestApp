@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import TransferSummary from "./TransferSummary";
 
 function TransferList({transfers}) {
@@ -5,7 +6,9 @@ function TransferList({transfers}) {
         <div className="tranfer-list section">
             {transfers && transfers.map (transfer => {
                 return (
-                    <TransferSummary transfer={transfer} key={transfer.id} />
+                    <Link to={'/transfer/' + transfer.id} key={transfer.id}>
+                        <TransferSummary transfer={transfer} />
+                    </Link>
                 )
             })}
 

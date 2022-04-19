@@ -1,22 +1,46 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { loadTransfers } from '../../store/actions/transferActions'
+import currencyFormater from '../../utils/currencyFormater'
 
 function TransferDetails(props) {
     console.log(props)
-    const id = props.match.params.id
-    return (
-        <div className="container section transfer-details">
-            <div className="card zdepth-0">
-                <div className="card-content">
-                    <span className="card-title">{id}</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum repellendus, quam enim ratione accusamus maxime, assumenda voluptatem delectus rerum ipsum dolore minima quos obcaecati. Similique quisquam a placeat dolorum in?</p>
-                </div>
-                <div className="card-action grey lighten-4 grey-text">
-                    <div>Hardcoded Text</div>
-                    <div>Anoder hardcoded text</div>
+    const transfer_id = props.match.params.transfer_id
+    console.log(transfer_id)
+    const transfer = props.transfers.find(transfer => transfer.id === transfer_id)
+    if (transfer) {
+        return (
+            <div className="container section transfer-details">
+                <div className="card zdepth-0">
+                    <div className="card-content">
+                        <span className="card-title">{currencyFormater(transfer.value)}</span>
+                        <p>{transfer.timestamp}</p>
+                    </div>
+                    <div className="card-action grey lighten-4 grey-text">
+                        <div>{transfer.account_code}</div>
+                        <div>{transfer.account_agent_id}</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        props.loadTransfers();
+        return (
+            <div className="red-text">LOADING DATA...</div>
+        )
+    }
 }
 
-export default TransferDetails;
+function mapStateToProps(state) {
+    return {
+        transfers: state.transfer.transfers
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        loadTransfers: () => dispatch(loadTransfers())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransferDetails);
